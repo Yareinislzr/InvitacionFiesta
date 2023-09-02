@@ -104,6 +104,8 @@ setCuarto(true)
   return()=> clearTimeout(cuatro)
 },[]);
 
+
+
 const Renderizar=()=>{
   if(primero){
     return<Redaccion />
@@ -111,13 +113,12 @@ const Renderizar=()=>{
     return <RedaccionDos />
   }else if(tercero){
     return <RedaccionTres />
-  }else(cuarto)
+  }else if(cuarto)
     return <RedaccionCuarto />
 }
 
   return (
     <>
-     
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <div>
       {Renderizar()}

@@ -4,7 +4,7 @@ import "./App.css";
 export const Redaccion = () => {
   const [text, setText] = useState("");
 
-  const message = `  Te invito a mi fiesta de 15 años   `
+  const message = `  Te invito a mi fiesta de 15 años `  
 
   useEffect(() => {
     let index = 0;
@@ -12,7 +12,7 @@ export const Redaccion = () => {
       setText((prevText) => prevText + message[index]);
       index++;
       if (index === message.trim().length) clearInterval(interval);
-    }, 100);
+    }, 50);
 
     return () => clearInterval(interval);
   }, []);
