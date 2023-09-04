@@ -5,8 +5,8 @@ export const RedaccionTres = () => {
   const [text, setText] = useState("");
 
   const message =`  Dia sábado, 15 de septiembre
-    Hora 7:00pm Salón de Eventos "Agustino"
-    ubicado en Jiron Ancash 2418.(frente a Tottus)
+    Hora 7:00pm Salón de Eventos
+    ubicado en  Agustino Jiron Ancash 2418.(frente a Tottus)
     Tu presencia en este día tan especial para mí sería un honor y una alegría inmensa.
 `
 

@@ -4,7 +4,9 @@ import { Redaccion } from "./Redaccion";
 import { RedaccionDos } from "./RedaccionDos";
 import { RedaccionTres } from "./RedaccionTres";
 import { RedaccionCuarto } from "./RedaccionCuarto";
-  
+import { Final } from "./Final";
+import { useSearchParams } from "react-router-dom";
+
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -14,7 +16,7 @@ const canvasStyles = {
   width: "100%",
   height: "100%",
   top: 0,
-  left: 0
+  left: 0,
 };
 
 function getAnimationSettings(originXA, originXB) {
@@ -26,18 +28,21 @@ function getAnimationSettings(originXA, originXB) {
     particleCount: 150,
     origin: {
       x: randomInRange(originXA, originXB),
-      y: Math.random() - 0.2
-    }
+      y: Math.random() - 0.2,
+    },
   };
 }
 
 export default function Invi() {
+  const [params] = useSearchParams();
+  const name = params.get("name") ?? "";
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
-  const[primero, setPrimero]=useState(false)
-  const[segundo, setSegundo]=useState(false)
-  const[tercero, setTercero]=useState(false)
-  const[cuarto, setCuarto]=useState(false)
+  const [primero, setPrimero] = useState(false);
+  const [segundo, setSegundo] = useState(false);
+  const [tercero, setTercero] = useState(false);
+  const [cuarto, setCuarto] = useState(false);
+  const [final, setFinal] = useState(false);
 
   const getInstance = useCallback((instance) => {
     refAnimationInstance.current = instance;
@@ -68,61 +73,67 @@ export default function Invi() {
     };
   }, [intervalId]);
 
-  useEffect(()=>{
-    startAnimation()
-    const uno = setTimeout(()=>{
-setPrimero(true)
-stopAnimation()
-    },1000);
-    return()=> clearTimeout(uno)
-},[]);
+  useEffect(() => {
+    startAnimation();
+    const uno = setTimeout(() => {
+      setPrimero(true);
+      stopAnimation();
+    }, 1000);
+    return () => clearTimeout(uno);
+  }, []);
 
-useEffect(()=>{
-  const dos = setTimeout(()=>{
-setPrimero(false)
-setSegundo(true)
+  useEffect(() => {
+    const dos = setTimeout(() => {
+      setPrimero(false);
+      setSegundo(true);
+    }, 5000);
+    return () => clearTimeout(dos);
+  }, []);
 
-  },5000);
-  return()=> clearTimeout(dos)
-},[]);
+  useEffect(() => {
+    const tres = setTimeout(() => {
+      setSegundo(false);
+      setTercero(true);
+    }, 12000);
+    return () => clearTimeout(tres);
+  }, []);
 
-useEffect(()=>{
-  const tres = setTimeout(()=>{
-setSegundo(false)
-setTercero(true)
+  useEffect(() => {
+    const cuatro = setTimeout(() => {
+      setTercero(false);
+      setCuarto(true);
+    }, 26000);
+    return () => clearTimeout(cuatro);
+  }, []);
 
-  },12000);
-  return()=> clearTimeout(tres)
-},[]);
+  useEffect(() => {
+    const final = setTimeout(() => {
+      setCuarto(false);
+      setFinal(true);
+    }, 32000);
+    return () => clearTimeout(final);
+  }, []);
 
-useEffect(()=>{
-  const cuatro = setTimeout(()=>{
-setTercero(false)
-setCuarto(true)
-
-  },26000);
-  return()=> clearTimeout(cuatro)
-},[]);
-
-
-
-const Renderizar=()=>{
-  if(primero){
-    return<Redaccion />
-  }else if(segundo){
-    return <RedaccionDos />
-  }else if(tercero){
-    return <RedaccionTres />
-  }else if(cuarto)
-    return <RedaccionCuarto />
-}
+  const Renderizar = () => {
+    if (primero) {
+      return <Redaccion />;
+    } else if (segundo) {
+      return <RedaccionDos />;
+    } else if (tercero) {
+      return <RedaccionTres />;
+    } else if (cuarto) {
+      return <RedaccionCuarto />;
+    } else if (final) {
+      return <Final />;
+    }
+  };
 
   return (
     <>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <div>
-      {Renderizar()}
-</div>
+        {"Te invito a mi fiesta " + name + " no faltes"}
+      </div>
     </>
   );
 }

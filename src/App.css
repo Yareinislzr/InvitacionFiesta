@@ -41,6 +41,14 @@
     animation: appear 0.15s forwards;
     opacity: 0;
   }
+
+  .final{
+    display: flex;
+    justify-content: center;
+    align-items:first baseline;
+    width: 100%;
+    height: 100vh;
+  }
   
   @keyframes appear {
     0% {
