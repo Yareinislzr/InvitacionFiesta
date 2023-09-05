@@ -5,7 +5,6 @@ import { RedaccionDos } from "./RedaccionDos";
 import { RedaccionTres } from "./RedaccionTres";
 import { RedaccionCuarto } from "./RedaccionCuarto";
 import { Final } from "./Final";
-import { useSearchParams } from "react-router-dom";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -68,12 +67,12 @@ export default function Invi() {
 
   useEffect(() => {
     return () => {
+      startAnimation();
       clearInterval(intervalId);
     };
-  }, [intervalId]);
+  }, []);
 
   useEffect(() => {
-    startAnimation();
     const uno = setTimeout(() => {
       setPrimero(true);
       stopAnimation();

@@ -7,10 +7,10 @@ export const Invitados=()=> {
   return (
     <div>
       {
-        contar.map((it)=>{
+        contar.map((it, index)=>{
           return(
-            <div>
-              https://mi-cumple15.netlify.app/?name={it.nombre}&pases={it.numero}
+            <div key={index}>
+              https://invitacion-cumplea-os-de-laura.netlify.app/?name={it.nombre.replaceAll(" ","%20")}&pases={it.numero}
             </div>
            
           )
