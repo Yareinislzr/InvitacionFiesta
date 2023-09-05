@@ -34,8 +34,7 @@ function getAnimationSettings(originXA, originXB) {
 }
 
 export default function Invi() {
-  const [params] = useSearchParams();
-  const name = params.get("name") ?? "";
+  
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
   const [primero, setPrimero] = useState(false);
@@ -110,7 +109,7 @@ export default function Invi() {
     const final = setTimeout(() => {
       setCuarto(false);
       setFinal(true);
-    }, 32000);
+    }, 35000);
     return () => clearTimeout(final);
   }, []);
 
@@ -131,8 +130,8 @@ export default function Invi() {
   return (
     <>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-      <div>
-        {"Te invito a mi fiesta " + name + " no faltes"}
+      <div className="render">
+        {Renderizar()}
       </div>
     </>
   );
