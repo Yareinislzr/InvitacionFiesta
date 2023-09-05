@@ -19,9 +19,7 @@ const router = createBrowserRouter([
        </div>
         <div className="imagen"><img className="foto" src="https://veiling.com.br/wp-content/uploads/2021/09/MACO-GYPSOPHILA-1-1-scaled.jpg" /></div>
        </div>
-       <div>
-        <Invitados />
-       </div>
+       
       </>
     ),
   },
