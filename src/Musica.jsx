@@ -1,8 +1,15 @@
-import ReactAudioPlayer from 'react-audio-player';
-import sonido from './SoundFile.mp3';
+import { useEffect } from "react";
+import sonido from "./Dream.mp3";
 
 export const Musica = () => {
-  return (
-    <ReactAudioPlayer src={sonido} autoPlay loop />
-  );
+  const sonar = () => {
+    const audioElement = new Audio(sonido);
+    audioElement.play();
+  };
+
+  useEffect(() => {
+    sonar();
+  }, []);
+
+  return 
 };

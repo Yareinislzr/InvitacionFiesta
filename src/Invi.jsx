@@ -5,10 +5,8 @@ import { RedaccionDos } from "./RedaccionDos";
 import { RedaccionTres } from "./RedaccionTres";
 import { RedaccionCuarto } from "./RedaccionCuarto";
 import { Final } from "./Final";
+import { Musica } from "./Musica";
 
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
 const canvasStyles = {
   position: "fixed",
   pointerEvents: "none",
@@ -17,6 +15,10 @@ const canvasStyles = {
   top: 0,
   left: 0,
 };
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function getAnimationSettings(originXA, originXB) {
   return {
@@ -33,14 +35,9 @@ function getAnimationSettings(originXA, originXB) {
 }
 
 export default function Invi() {
-  
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
-  const [primero, setPrimero] = useState(false);
-  const [segundo, setSegundo] = useState(false);
-  const [tercero, setTercero] = useState(false);
-  const [cuarto, setCuarto] = useState(false);
-  const [final, setFinal] = useState(false);
+  const [step, setStep] = useState(0);
 
   const getInstance = useCallback((instance) => {
     refAnimationInstance.current = instance;
@@ -59,7 +56,6 @@ export default function Invi() {
     }
   }, [intervalId, nextTickAnimation]);
 
-
   useEffect(() => {
     return () => {
       startAnimation();
@@ -68,56 +64,30 @@ export default function Invi() {
   }, []);
 
   useEffect(() => {
-    const uno = setTimeout(() => {
-      setPrimero(true);
-    }, 1000);
-    return () => clearTimeout(uno);
-  }, []);
+    const timeouts = [
+      setTimeout(() => setStep(1), 1000),
+      setTimeout(() => setStep(2), 5000),
+      setTimeout(() => setStep(3), 12000),
+      setTimeout(() => setStep(4), 26000),
+      setTimeout(() => setStep(5), 35000),
+    ];
 
-  useEffect(() => {
-    const dos = setTimeout(() => {
-      setPrimero(false);
-      setSegundo(true);
-    }, 5000);
-    return () => clearTimeout(dos);
-  }, []);
-
-  useEffect(() => {
-    const tres = setTimeout(() => {
-      setSegundo(false);
-      setTercero(true);
-    }, 12000);
-    return () => clearTimeout(tres);
-  }, []);
-
-  useEffect(() => {
-    const cuatro = setTimeout(() => {
-      setTercero(false);
-      setCuarto(true);
-    }, 26000);
-    return () => clearTimeout(cuatro);
-  }, []);
-
-  useEffect(() => {
-    const final = setTimeout(() => {
-      setCuarto(false);
-      setFinal(true);
-    }, 35000);
-    return () => clearTimeout(final);
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+    };
   }, []);
 
   const Renderizar = () => {
-    if (primero) {
-      return <Redaccion />;
-    } else if (segundo) {
-      return <RedaccionDos />;
-    } else if (tercero) {
-      return <RedaccionTres />;
-    } else if (cuarto) {
-      return <RedaccionCuarto />;
-    } else if (final) {
-      return <Final />;
-    }
+    return (
+      <>
+        <Musica />
+        {step === 1 && <Redaccion />}
+        {step === 2 && <RedaccionDos />}
+        {step === 3 && <RedaccionTres />}
+        {step === 4 && <RedaccionCuarto />}
+        {step === 5 && <Final />}
+      </>
+    );
   };
 
   return (
