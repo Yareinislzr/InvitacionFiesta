@@ -1,10 +1,10 @@
 import React from "react";
-import Nombre from "./Nombre";
-import Invi from "./Invi";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import  Invi  from "./Invi";
+import Nombre from "./Nombre";
 import { Musica } from "./Musica";
 
 const router = createBrowserRouter([
