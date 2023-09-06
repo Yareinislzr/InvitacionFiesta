@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import {Invitados} from "./Invitados";
+import { Musica } from "./Musica";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +16,7 @@ const router = createBrowserRouter([
        <div>
        <Nombre />
         <Invi />
+        <Musica />
        </div>
         <div className="imagen"><img className="foto" src="https://veiling.com.br/wp-content/uploads/2021/09/MACO-GYPSOPHILA-1-1-scaled.jpg" /></div>
        </div>

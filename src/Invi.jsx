@@ -5,6 +5,7 @@ import { RedaccionDos } from "./RedaccionDos";
 import { RedaccionTres } from "./RedaccionTres";
 import { RedaccionCuarto } from "./RedaccionCuarto";
 import { Final } from "./Final";
+import { Musica } from "./Musica";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -59,11 +60,6 @@ export default function Invi() {
     }
   }, [intervalId, nextTickAnimation]);
 
-  const stopAnimation = useCallback(() => {
-    clearInterval(intervalId);
-    setIntervalId(null);
-    refAnimationInstance.current && refAnimationInstance.current.reset();
-  }, [intervalId]);
 
   useEffect(() => {
     return () => {
@@ -75,10 +71,9 @@ export default function Invi() {
   useEffect(() => {
     const uno = setTimeout(() => {
       setPrimero(true);
-      stopAnimation();
     }, 1000);
     return () => clearTimeout(uno);
-  }, []);
+  }, [intervalId]);
 
   useEffect(() => {
     const dos = setTimeout(() => {
@@ -86,7 +81,7 @@ export default function Invi() {
       setSegundo(true);
     }, 5000);
     return () => clearTimeout(dos);
-  }, []);
+  }, [intervalId]);
 
   useEffect(() => {
     const tres = setTimeout(() => {
@@ -94,7 +89,7 @@ export default function Invi() {
       setTercero(true);
     }, 12000);
     return () => clearTimeout(tres);
-  }, []);
+  }, [intervalId]);
 
   useEffect(() => {
     const cuatro = setTimeout(() => {
@@ -102,7 +97,7 @@ export default function Invi() {
       setCuarto(true);
     }, 26000);
     return () => clearTimeout(cuatro);
-  }, []);
+  }, [intervalId]);
 
   useEffect(() => {
     const final = setTimeout(() => {
@@ -110,7 +105,7 @@ export default function Invi() {
       setFinal(true);
     }, 35000);
     return () => clearTimeout(final);
-  }, []);
+  }, [intervalId]);
 
   const Renderizar = () => {
     if (primero) {
@@ -131,6 +126,7 @@ export default function Invi() {
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <div className="render">
         {Renderizar()}
+        <Musica />
       </div>
     </>
   );
