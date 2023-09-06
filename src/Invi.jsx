@@ -5,7 +5,6 @@ import { RedaccionDos } from "./RedaccionDos";
 import { RedaccionTres } from "./RedaccionTres";
 import { RedaccionCuarto } from "./RedaccionCuarto";
 import { Final } from "./Final";
-import { Musica } from "./Musica";
 
 const canvasStyles = {
   position: "fixed",
@@ -61,7 +60,9 @@ export default function Invi() {
       startAnimation();
       clearInterval(intervalId);
     };
-  }, []);
+  }, [intervalId]);
+
+  
 
   useEffect(() => {
     const timeouts = [
@@ -80,7 +81,6 @@ export default function Invi() {
   const Renderizar = () => {
     return (
       <>
-        <Musica />
         {step === 1 && <Redaccion />}
         {step === 2 && <RedaccionDos />}
         {step === 3 && <RedaccionTres />}
